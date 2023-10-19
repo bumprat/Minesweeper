@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="minesweeper.js" defer></script>
+</head>
+
+<body>
+    <div id="toolbar">
+        <div>
+            <label for="numRows">行数<span></span></label>
+            <input type="range" id="numRows" value="10" min="3" max="20" />
+        </div>
+        <div>
+            <label for="numCols">列数<span></span></label>
+            <input type="range" id="numCols" value="10" min="3" max="50" />
+        </div>
+        <div>
+            <label for="numMines">雷数<span></span></label>
+            <input type="range" id="numMines" value="10" min="1" max="100" />
+        </div>
+        <div>
+            <button id="newGame">新游戏</button>
+        </div>
+    </div>
+    <div id="main">
+        <div id="stage">
+            <div class="row">
+                <div class="cell">
+                    <div class="cell-inner"></div>
+                </div>
+                <div class="cell">
+                    <div class="cell-inner-opened">1</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        Mine Sweeper @Leijingyu
+    </div>
+</body>
+
+</html>

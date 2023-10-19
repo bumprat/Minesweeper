@@ -1,0 +1,127 @@
+body {
+    display:flex;
+    flex-direction: column;
+    background-color: #D2E0FB;
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+}
+#toolbar, #footer {
+    background-color: #e6ebf8;
+    padding: 10px;
+    flex: 0 0;
+    display: flex;
+    flex-direction: row;
+}
+#toolbar>div {
+    flex: 1 1;
+    display: flex;
+    margin-right: 20px;
+}
+#toolbar>div>label>span {
+    background-color: #F9F3CC;
+    border:1px solid #c5c0a1;
+    padding:3px;
+    border-radius: 3px;
+    margin-left: 3px;
+}
+#toolbar>div>input {
+    flex: 1 1;
+}
+#toolbar>div:has(>#newGame) {
+    flex: 0 0 auto;
+}
+button#newGame, button#newGame:active:hover {
+    background-color: #D7E5CA;
+    border: 1px solid #88927f;
+    border-radius: 3px;
+}
+button#newGame:hover {
+    background-color: #ebf9dd;
+    border: 1px solid #0e0f0d;
+}
+#main {
+    flex: 1 0;
+    display: flex;
+    overflow: auto;
+}
+#stage {
+    display:flex;
+    flex-direction: column;
+    background-color: #666;
+    border: 5px solid #aaa;
+    border-radius: 5px;
+    margin: auto;  /*https://stackoverflow.com/questions/33454533/cant-scroll-to-top-of-flex-item-that-is-overflowing-container*/
+    padding: 3px;
+    user-select: none;
+}
+.row {
+    display: flex;
+}
+.cell, .cell-inner, .cell-inner-opened{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.cell {
+    width:1.5em;
+    height:1.5em;
+    margin:1px;
+    font-size:1.5em;
+}
+.cell-inner, .cell-inner-opened {
+    width: 95%;
+    height: 95%;
+    border-radius: 4px;
+}
+.cell-inner {
+    background-color: #444;
+    cursor: pointer;
+}
+.cell-inner-opened {
+    background-color: #fff;
+    color: #555;
+    font-weight: bolder;   
+    cursor:default;
+    animation: cell-open 0.2s ease-in;
+}
+.cell-explode {
+    background-color: rgb(255, 160, 160);
+}
+
+@keyframes cell-open {
+    from {
+        background-color: #ccc;
+        scale: 1.2;
+    }
+}
+.cell-inner:hover {
+    background-color: #eee;
+}
+.cell-number-0 {
+    background-color: #bbb;
+}
+.cell-number-1 {
+    color: blue;
+}
+.cell-number-2 {
+    color: green; 
+}
+.cell-number-3 {
+    color: red;
+}
+.cell-number-4 {
+    color: orange;
+}
+.cell-number-5 {
+    color: purple
+}
+.cell-number-6 {
+    color: peru;   
+}
+.cell-number-7 {
+    color: black;   
+}
+.cell-number-8 {
+    color: cyan;   
+}
