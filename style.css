@@ -12,11 +12,15 @@ body {
     flex: 0 0;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 #toolbar>div {
     flex: 1 1;
     display: flex;
     margin-right: 20px;
+}
+#toolbar>div>label{
+    flex: 0 0 auto;
 }
 #toolbar>div>label>span {
     background-color: #F9F3CC;
