@@ -19,8 +19,6 @@ game.prototype.initUI = function () {
     self.initInput('numCols')
     self.initInput('numMines')
     document.querySelector('#newGame').addEventListener('click', function (e) {
-        self.rows = parseInt(document.querySelector('#numRows').value)
-        self.cols = parseInt(document.querySelector('#numCols').value)
         self.newGame()
     })
     document.querySelector('#stage').addEventListener('contextmenu', function (e) {
