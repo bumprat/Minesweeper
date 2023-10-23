@@ -1,5 +1,4 @@
 // 扫雷
-// 页面UI要求：#numRows, #numCols, #newGame, #stage, .cell, .cell-inner, .cell-opened
 console.log('扫雷')
 function game() {
     const self = this
@@ -110,16 +109,14 @@ game.prototype.dig = async function (row, col) {
     const numMines = self.calc(row, col, c => c.hasMine)
     cell.divCellInner.classList.add("cell-number-" + numMines)
     if (numMines === 0) {
-        const promises = []
-        for (let r = row - 1; r <= row + 1; r++) {
-            for (let c = col - 1; c <= col + 1; c++) {
-                if (r < 0 || r >= self.numRows || c < 0 || c >= self.numCols) continue
-                if (self.cells[r * self.numCols + c].status === "ready") {
-                    await self.waitFor(50)
-                    promises.push(self.dig(r, c))
-                }
+        const promises = self.around(row, col, async (r, c)=>{
+            const ps = []
+            if (self.cells[r * self.numCols + c].status === "ready") {
+                await self.waitFor(50)
+                ps.push(self.dig(r, c))
             }
-        }
+            return Promise.all(ps)
+        })
         await Promise.all(promises)
         return
     }
@@ -167,13 +164,18 @@ game.prototype.calc = function (row, col, filter) {
 
 game.prototype.around = function (row, col, callback) {
     const self = this
+    const promises = []
     for (let r = row - 1; r <= row + 1; r++) {
         for (let c = col - 1; c <= col + 1; c++) {
             if (r < 0 || r >= self.numRows || c < 0 || c >= self.numCols) continue
             if (r == row && c == col) continue
-            callback(r, c)
+            const result = callback(r, c)
+            if(result?.constructor === Promise){
+                promises.push(result)
+            }
         }
     }
+    return promises
 }
 
 game.prototype.flag = async function (row, col) {
@@ -192,7 +194,7 @@ game.prototype.flag = async function (row, col) {
     const numFlags = self.calc(row, col, c => c.status === "flag")
     const numMines = self.calc(row, col, c => c.hasMine)
     if (numFlags === numMines) {
-        await self.around(row, col, function (r, c) { self.dig(r, c) })
+        await Promise.all(self.around(row, col, async function (r, c) { await self.dig(r, c) }))
     }
 }
 
